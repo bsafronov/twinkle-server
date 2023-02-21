@@ -1,11 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ValidationError } from 'class-validator';
+import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateUserDTO } from './dto/createUserDto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { ApiError } from 'src/common/errors/errors';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateUserDTO } from './dto/updateUserDto';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +26,15 @@ export class UsersService {
     if (user) return user;
 
     return null;
+  }
+
+  async updateUser(id: number, dto: UpdateUserDTO) {
+    await this.usersRepository.update({ id }, dto);
+    return dto;
+  }
+
+  async deleteUser(id: number) {
+    await this.usersRepository.delete({ id });
   }
 
   async createUser(dto: CreateUserDTO): Promise<CreateUserDTO> {

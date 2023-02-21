@@ -46,6 +46,7 @@ export class AuthService {
       throw new BadRequestException(ApiError.WRONG_PASSWORD);
     }
 
+    delete existUser.password;
     const token = await this.tokenService.generateJwtToken(existUser);
 
     return { token };
@@ -67,6 +68,7 @@ export class AuthService {
       throw new BadRequestException(ApiError.WRONG_PASSWORD);
     }
 
+    delete existUser.password;
     const token = await this.tokenService.generateJwtToken(existUser);
 
     return { token };

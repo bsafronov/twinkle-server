@@ -36,12 +36,12 @@ export class CreateUserDTO {
   @IsString({ message: 'Имя должно быть строкой' })
   @Matches(nameMatch, { message: 'Имя не может иметь цифр' })
   @MinLength(2, { message: 'Имя не может быть меньше 2 букв' })
-  firstName?: string;
+  firstName: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString({ message: 'Фамилия не может содержать цифр' })
   @Matches(nameMatch, { message: 'Фамилия не может иметь цифр' })
   @MinLength(2, { message: 'Фамилия не может быть меньше 2 букв' })
-  lastName?: string;
+  lastName: string;
 }
