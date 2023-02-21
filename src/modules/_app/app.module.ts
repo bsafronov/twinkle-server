@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from 'src/common/config';
 import { AuthModule } from '../auth/auth.module';
+import { TokenModule } from '../token/token.module';
 import { User } from '../users/entities/user.entity';
 import { UsersModule } from '../users/users.module';
 
@@ -19,6 +20,7 @@ import { UsersModule } from '../users/users.module';
     }),
     UsersModule,
     AuthModule,
+    TokenModule,
   ],
   controllers: [],
   providers: [],

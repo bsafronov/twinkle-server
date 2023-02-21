@@ -7,4 +7,8 @@ export default {
     PASSWORD: 'admin',
     NAME: 'twinkle',
   },
+  TOKEN: {
+    SECRET_KEY: 'SomeSecretKey321',
+    EXPIRES_IN: '30d',
+  },
 };
