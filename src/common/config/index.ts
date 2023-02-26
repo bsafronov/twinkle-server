@@ -11,4 +11,5 @@ export default {
     SECRET_KEY: 'SomeSecretKey321',
     EXPIRES_IN: '30d',
   },
+  CLIENT_URL: 'http://localhost:3000',
 };

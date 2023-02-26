@@ -4,14 +4,15 @@ import {
   Delete,
   Get,
   Patch,
+  Post,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/common/guards/jwtAuthGuard';
-import { TokenAuthDTO } from '../token/dto/tokenAuthDto';
+import { JwtAuthGuard } from 'src/modules/security/guards/jwtAuthGuard';
+import { TokenAuthDTO } from '../security/token/dto/tokenAuthDto';
 import { UpdateUserDTO } from './dto/updateUserDto';
-import { UsersService } from './users.service';
+import { UsersService } from './user.service';
 
 @Controller('users')
 export class UsersController {
@@ -32,6 +33,6 @@ export class UsersController {
   @Delete()
   deleteUser(@Req() request) {
     const user: TokenAuthDTO = request.user;
-    this.userService.deleteUser(user.id);
+    return this.userService.deleteUser(user.id);
   }
 }

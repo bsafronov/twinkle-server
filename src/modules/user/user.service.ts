@@ -5,15 +5,21 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateUserDTO } from './dto/updateUserDto';
+import { WallService } from '../wall/wall.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    private readonly wallService: WallService,
   ) {}
 
   async findByUsername(username: string) {
-    const user = await this.usersRepository.findOne({ where: { username } });
+    const user = await this.usersRepository.findOne({
+      where: { username },
+      select: ['password', 'id', 'email', 'username'],
+    });
+    console.log(user);
 
     if (user) return user;
 
@@ -21,7 +27,10 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    const user = await this.usersRepository.findOne({ where: { email } });
+    const user = await this.usersRepository.findOne({
+      where: { email },
+      select: ['password', 'id', 'email', 'username'],
+    });
 
     if (user) return user;
 
@@ -37,13 +46,13 @@ export class UsersService {
     await this.usersRepository.delete({ id });
   }
 
-  async createUser(dto: CreateUserDTO): Promise<CreateUserDTO> {
+  async createUser(dto: CreateUserDTO): Promise<User> {
     const hashPassword = await bcrypt.hash(dto.password, 10);
-    const user = this.usersRepository.create({
+    const user = await this.usersRepository.save({
       ...dto,
       password: hashPassword,
     });
-    this.usersRepository.save(user);
+    await this.wallService.createWall(user);
 
     return user;
   }

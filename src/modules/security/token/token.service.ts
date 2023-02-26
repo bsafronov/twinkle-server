@@ -7,7 +7,12 @@ import { TokenAuthDTO } from './dto/tokenAuthDto';
 export class TokenService {
   constructor(private readonly jwtService: JwtService) {}
 
-  async generateJwtToken(user: TokenAuthDTO) {
+  async generateJwtToken(data: TokenAuthDTO) {
+    const user: TokenAuthDTO = {
+      id: data.id,
+      email: data.email,
+      username: data.username,
+    };
     const payload = { user };
 
     return this.jwtService.sign(payload, {

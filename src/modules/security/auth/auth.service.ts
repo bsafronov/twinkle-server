@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ApiError } from 'src/common/errors/errors';
-import { CreateUserDTO } from '../users/dto/createUserDto';
-import { UsersService } from '../users/users.service';
+import { CreateUserDTO } from '../../user/dto/createUserDto';
+import { UsersService } from '../../user/user.service';
 import { LoginUserDTO } from './dto/loginUserDto';
 import * as bcrypt from 'bcrypt';
 import { TokenService } from '../token/token.service';
@@ -14,7 +14,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
   ) {}
 
-  async registration(dto: CreateUserDTO): Promise<CreateUserDTO> {
+  async registration(dto: CreateUserDTO): Promise<AuthUserResponse> {
     let existUser = await this.usersService.findByEmail(dto.email);
 
     if (existUser) {
@@ -27,7 +27,10 @@ export class AuthService {
       throw new BadRequestException(ApiError.USERNAME_EXIST);
     }
 
-    return this.usersService.createUser(dto);
+    const user = await this.usersService.createUser(dto);
+    const token = await this.tokenService.generateJwtToken(user);
+
+    return { token };
   }
 
   async loginViaUsername(dto: LoginUserDTO): Promise<AuthUserResponse> {
@@ -45,8 +48,6 @@ export class AuthService {
     if (!isPassValidated) {
       throw new BadRequestException(ApiError.WRONG_PASSWORD);
     }
-
-    delete existUser.password;
     const token = await this.tokenService.generateJwtToken(existUser);
 
     return { token };
@@ -68,7 +69,6 @@ export class AuthService {
       throw new BadRequestException(ApiError.WRONG_PASSWORD);
     }
 
-    delete existUser.password;
     const token = await this.tokenService.generateJwtToken(existUser);
 
     return { token };
