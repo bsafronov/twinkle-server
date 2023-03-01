@@ -23,11 +23,11 @@ import { WallModule } from '../wall/wall.module';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: config.DB.HOST,
+      host: 'postgres://bogdasafronov:XorqZxMynWPtfq39odsrSqhWC7M1bqn8@dpg-cfvnv4vdvk4rro7jub70-a.oregon-postgres.render.com/twinkle',
       port: config.DB.PORT,
-      username: config.DB.USERNAME,
-      password: config.DB.PASSWORD,
-      database: config.DB.NAME,
+      username: 'bogdasafronov',
+      password: 'XorqZxMynWPtfq39odsrSqhWC7M1bqn8',
+      database: 'twinkle',
       entities: [
         User,
         Post,
