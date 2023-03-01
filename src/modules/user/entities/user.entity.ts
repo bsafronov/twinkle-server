@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { BaseEntity } from 'src/common/entity/base.entity';
+import { BaseEntity } from 'src/modules/entity/base.entity';
 import { PostComment } from 'src/modules/post/entities/post-comments.entity';
 import { PostLike } from 'src/modules/post/entities/post-likes.entity';
 import { Post } from 'src/modules/post/entities/post.entity';

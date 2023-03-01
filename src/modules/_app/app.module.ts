@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
-import config from 'src/common/config';
 import { PostComment } from '../post/entities/post-comments.entity';
 import { PostContent } from '../post/entities/post-content.entity';
 import { PostLike } from '../post/entities/post-likes.entity';

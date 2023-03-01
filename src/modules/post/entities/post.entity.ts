@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/common/entity/base.entity';
+import { BaseEntity } from 'src/modules/entity/base.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { Wall } from 'src/modules/wall/entities/wall.entity';
 import {
