@@ -23,11 +23,11 @@ import { WallModule } from '../wall/wall.module';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres://bogdasafronov:XorqZxMynWPtfq39odsrSqhWC7M1bqn8@dpg-cfvnv4vdvk4rro7jub70-a.oregon-postgres.render.com/twinkle',
-      port: config.DB.PORT,
+      host: 'dpg-cfvp0dl269v0ptn1sg9g-a.frankfurt-postgres.render.com',
+      port: 5432,
       username: 'bogdasafronov',
-      password: 'XorqZxMynWPtfq39odsrSqhWC7M1bqn8',
-      database: 'twinkle',
+      password: 'IGNLO0Bhf6EDU4CV8qtKym9Akb3brBzl',
+      database: 'twinkle_5jqb',
       entities: [
         User,
         Post,
@@ -37,6 +37,7 @@ import { WallModule } from '../wall/wall.module';
         PostLike,
         PostComment,
       ],
+      ssl: true,
       synchronize: true,
     }),
     UsersModule,
